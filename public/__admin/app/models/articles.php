@@ -226,7 +226,7 @@ class articles {
 		} else if (!isset($_POST['publish_minutes']) || (@$_POST['publish_minutes']<0) || (@$_POST['publish_minutes']>59)) {
 			$response['errors'][] = 'article_add_err_publish_minutes_invalid';
 		} else {
-			$article['publish_datetime'] = utils::formatPlainDate('Y-m-d', $_POST['publish_date']).' '.str_pad((int)$_POST['publish_hour'], 2, STR_PAD_LEFT).':'.str_pad((int)$_POST['publish_minutes'], 2, STR_PAD_LEFT).':00';
+			$article['publish_datetime'] = utils::formatPlainDate('Y-m-d', $_POST['publish_date']).' '.str_pad((int)$_POST['publish_hour'], 2, '0', STR_PAD_LEFT).':'.str_pad((int)$_POST['publish_minutes'], 2, '0', STR_PAD_LEFT).':00';
 		}
 
 		/*if (!utils::valid_date(@$_POST['add_date'])) {

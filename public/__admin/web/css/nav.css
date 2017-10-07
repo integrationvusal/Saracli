@@ -13,7 +13,7 @@
 .nav-role-root {
 	background: url('../images/nav-role-root.png') !important;
 }
-.nav-role-phonebook, .nav-role-personalities{
+.nav-role-phonebook, .nav-role-personalities, .nav-role-gallery{
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -27,6 +27,9 @@
 }
 .nav-role-personalities:before {
 	content:"\f0c0";
+}
+.nav-role-gallery:before{
+	content:"\f03e";
 }
 .nav-role-category {
 	background: url('../images/nav-role-category.png') !important;

@@ -36,7 +36,7 @@ if (!defined("_VALID_PHP")) {die('Direct access to this location is not allowed.
 			if (!empty($op)) {
 				if ($op['success']) {
 					print view::notice($op['message'], 'success');
-					utils::delayedRedirect($link_back);
+					utils::delayedRedirect($link_back, 0);
 				} else {
 					print view::notice(empty($op['errors'])? $op['message']: $op['errors']);
 				}

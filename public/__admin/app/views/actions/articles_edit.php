@@ -284,7 +284,7 @@ CKEDITOR.replace('wysiwyg_full_<?=$lng['language_dir'];?>', {
 
 						<div class="tab-pane active" id="common-tab">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="form-group">
 										<label class="id-number"><?=CMS::t('article_id_num')?>: &nbsp; <?=$article['id']?></label>
 									</div>
@@ -353,7 +353,7 @@ CKEDITOR.replace('wysiwyg_full_<?=$lng['language_dir'];?>', {
 										</div>
 										<div class="div-tabs tab-video">
                                             <label><?= CMS::t('video'); ?></label>
-                                            <input placeholder="http://www.youtube.com/watch?v=bQr3H3ToW-Q" type="text" name="image" value="<?=$videoUrl?>" class="form-control">
+                                            <input placeholder="http://www.youtube.com/watch?v=bQr3H3ToW-Q" type="text" name="image" value="<?=isset($videoUrl)?$videoUrl:null?>" class="form-control">
                                         </div>
 									</div>
 
@@ -466,6 +466,7 @@ $(document).ready(function() {
 									</div>
 								</div>
 
+								<?/*?>
 								<div class="col-md-6">
 									<?php if (!empty($cats) && count($cats)) { ?>
 									<div class="form-group">
@@ -495,7 +496,7 @@ $(document).ready(function() {
 										</div>
 									</div>
 									<?php } ?>
-								</div>
+								</div><?*/?>
 							</div>
 						</div>
 					</div>

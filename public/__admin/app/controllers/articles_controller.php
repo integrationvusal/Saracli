@@ -66,7 +66,7 @@ class articles_controller extends controller {
 		if (isset($_POST['add'])) {
 			$params['op'] = articles::addArticle();
 			if ($params['op']['success']) {
-				utils::delayedRedirect($params['link_back']);
+				utils::delayedRedirect($params['link_back'], 0);
 			} else {
 				if (!empty($_POST['gallery_id'])) {
 					$params['gallery'] = gallery::getGalleryInfo($_POST['gallery_id']);
@@ -114,7 +114,7 @@ class articles_controller extends controller {
 			$params['op'] = articles::editArticle($id);
 			$params['article'] = articles::getArticle($id);
 			if ($params['op']['success'] && isset($_POST['save'])) {
-				utils::delayedRedirect($params['link_back']);
+				utils::delayedRedirect($params['link_back'], 0);
 			}
 		}
 

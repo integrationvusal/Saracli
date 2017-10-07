@@ -14,6 +14,16 @@ $(document).ready(function() {
 
 $(document).ready(function () {
 
+    $('td[width="50%"] button').click(function(){
+        $('td[width="50%"] button').removeClass('btn-success').addClass('btn-primary');
+        $(this).removeClass('btn-primary').addClass('btn-success');
+        _videos = $(this).parents('table').find('tr').slice(-1*$('td[width="50%"] button').length);
+        _videos.hide();
+        $(_videos[ $(this).index('td[width="50%"] button') ]).show();
+    });
+
+    $('td[width="50%"] button:first').trigger('click');
+
     $(".next-step, .prev-step").click(navigateTab);
 
 });
@@ -46,22 +56,29 @@ $(document).ready(function() {
     });   
    
    
-   var mySelect = $('#first-disabled2');
 
-    $('#special').on('click', function () {
-      mySelect.find('option:selected').prop('disabled', true);
-      mySelect.selectpicker('refresh');
-    });
+   if($('#first-disabled2').attr('id')  != undefined){
+        var mySelect = $('#first-disabled2');
 
-    $('#special2').on('click', function () {
-      mySelect.find('option:disabled').prop('disabled', false);
-      mySelect.selectpicker('refresh');
-    });
+        $('#special').on('click', function () {
+          mySelect.find('option:selected').prop('disabled', true);
+          mySelect.selectpicker('refresh');
+        });
 
-    $('#basic2').selectpicker({
-      liveSearch: true,
-      maxOptions: 1
-    });
+        $('#special2').on('click', function () {
+          mySelect.find('option:disabled').prop('disabled', false);
+          mySelect.selectpicker('refresh');
+        });
+   }
+
+
+    if( $('#basic2').attr('id') != undefined ){
+        $('#basic2').selectpicker({
+          liveSearch: true,
+          maxOptions: 1
+        });
+    }
+
     
     
     $(".payment").css("display", "none");

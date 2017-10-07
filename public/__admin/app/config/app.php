@@ -3,7 +3,7 @@ defined('_VALID_PHP') or die('No direct script access.');
 
 ini_set('session.cookie_httponly', true);
 //ini_set('session.cookie_secure', true);
-//date_default_timezone_set('Asia/Baku');
+date_default_timezone_set('Asia/Baku');
 
 require_once CONFIG_DIR.'db.php';
 require_once CONFIG_DIR.'dirs.php';

@@ -170,19 +170,27 @@ class gallery {
 
 	public static function allAlbums()
 	{
-		function scan_dir($dir, &$arr) {
-			$files = array_values(array_filter(scandir($dir), function($val){ return !in_array($val, ['.', '..']); }));
-			foreach ($files as $file) {
-				if(is_dir($dir.'/'.$file)) { scan_dir($dir.'/'.$file, $arr); }
-				if(is_file($dir.'/'.$file)) {  $arr[basename($dir)][] = $file; }   
+
+		$datas = array_reverse(self::getGalleriesList());
+		
+		if($datas){
+			function scan_dir($dir, &$arr) {
+				$files = array_values(array_filter(scandir($dir), function($val){ return !in_array($val, ['.', '..']); }));
+				foreach ($files as $file) {
+					if(is_dir($dir.'/'.$file)) { scan_dir($dir.'/'.$file, $arr); }
+					if(is_file($dir.'/'.$file)) {  $arr[basename($dir)][] = $file; }   
+				}
+				return $arr;
 			}
-			return $arr;
+
+			$res = [];
+			$res = scan_dir(UPLOADS_DIR.'albums', $res);
+
+			return array_map(function($val, $res){ $val['photos'] = $res; return $val; }, $datas, $res);
 		}
 
-		$res = [];
-		$res = scan_dir(UPLOADS_DIR.'albums', $res);
-
-		return array_map(function($val, $res){ $val['photos'] = $res; return $val; }, self::getGalleriesList(), $res);
+		return [];
+		
 	}
 
 	public static function getGalleriesList() {
@@ -261,14 +269,18 @@ class gallery {
 		return $gallery;
 	}
 
-	public static function moveGalleryToBin($gallery_id) { // 2016-05-16
-		$deleted = CMS::$db->mod('galleries#'.(int)$gallery_id, [
-			'is_deleted' => '1',
-		]);
+	public static function moveGalleryToBin($gallery_id) { 
+
+		$folder = CMS::$db->get("SELECT t.text FROM ".self::$tbl." g LEFT JOIN translates t ON t.ref_id = g.id AND t.ref_table='".self::$tbl."' AND lang=:lang WHERE g.id='{$gallery_id}' LIMIT 1", ['lang'=>CMS::$default_site_lang]);
+
+		utils::deleteDir(self::$dir.$folder.'/');
+
+		$deleted = CMS::$db->exec("DELETE FROM ".self::$tbl." WHERE id='{$gallery_id}'");
+		CMS::$db->exec("OPTIMIZE TABLE ".self::$tbl);
 
 		if ($deleted) {
 			CMS::log([
-				'subj_table' => 'galleries',
+				'subj_table' => self::$tbl,
 				'subj_id' => $gallery_id,
 				'action' => 'delete',
 				'descr' => 'Gallery album moved to recycle bin by '.$_SESSION[CMS::$sess_hash]['ses_adm_type'].' '.ADMIN_INFO,

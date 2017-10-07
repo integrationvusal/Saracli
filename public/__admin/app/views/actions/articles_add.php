@@ -170,7 +170,7 @@ view::appendJS(SITE_DIR . CMS_DIR . JS_DIR . 'ckeditor/ckeditor.js');
                         <!-- Common Informational TAB -->
                         <div class="tab-pane" id="common-tab">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label><a href="https://google.com/?q=SEF+friendly+urls" title=""
                                                   target="_blank"><?= CMS::t('news_sef'); ?> <i
@@ -336,6 +336,7 @@ view::appendJS(SITE_DIR . CMS_DIR . JS_DIR . 'ckeditor/ckeditor.js');
                                     </div>
                                 </div>
 
+                                <?/*?>
                                 <div class="col-md-6">
                                     <?php if (!empty($cats) && count($cats)) { ?>
                                         <div class="form-group">
@@ -388,6 +389,8 @@ view::appendJS(SITE_DIR . CMS_DIR . JS_DIR . 'ckeditor/ckeditor.js');
                                     <?php }?>
 
                                 </div>
+
+                                <?*/?>
                             </div>
                         </div>
 

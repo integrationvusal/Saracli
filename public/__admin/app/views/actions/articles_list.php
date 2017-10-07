@@ -6,6 +6,7 @@ use jewish\backend\helpers\view;
 
 if (!defined("_VALID_PHP")) {die('Direct access to this location is not allowed.');}
 
+
 ?>
 
 
