@@ -1,1 +1,0 @@
-<input type="hidden" name="blockFieldId[]" class="block-field-id" value="{$value}" />

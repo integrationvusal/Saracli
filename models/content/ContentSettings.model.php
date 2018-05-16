@@ -1,1 +1,0 @@
-<?php	class ContentSettings {		public static $blockFieldTypes = Array(			'1' => 'Image',			'2' => 'Text Area',		);	}?>
